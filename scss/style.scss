@@ -1,0 +1,65 @@
+//FONT
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=VT323&display=swap');
+// font-family: 'Oswald', sans-serif;
+// font-family: 'VT323', monospace;
+
+//RESET
+@import "reset";
+
+
+//MAIN
+body {
+  font: 16px/1 "Oswald";
+}
+
+figure {
+  position: relative; 
+  width: 100%;
+  height: 100vh; //100% 안먹힐때 확실하게
+  overflow: hidden; //scroll 발생유무 
+  background: linear-gradient(25deg,  rgb(127, 153, 178), hwb(210 1% 72%));  //(각도(왼->오), 시작색, 끝색)
+
+  h1 {
+    position: absolute;
+    top: 7vh;
+    left: 4vw;
+    // font-size: 0;  // strong 과 spand의 간격이 너무 떨어져있을 때 사용 
+        
+    strong {  //LOGO
+      font-size: 40px;
+      line-height: 1;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    span {
+      font-size: 16px;
+      line-height: 16px;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+  }
+
+  .menu {
+    position: absolute;
+    top: 8vh;
+    right: 4vw;
+    font-size: 30px;
+    color: #fff;
+  }
+  //PANEL
+  @import "panel";
+
+  // BTNS
+  @import "btns";
+
+  > p { //직계자손쓰는 이유 : 앨범 하단에 있는 p태그에 영향을 끼치지 않으려고 
+    position: absolute;
+    bottom: 7vh;
+    left: 50%;  //부모크기의 50%
+    transform: translateX(-50%);  //자기크기의 50% 
+    font-size: 16px/1;
+    color: #fff;
+  }
+}
+

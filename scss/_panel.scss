@@ -1,0 +1,30 @@
+section {
+  position: absolute;
+  width: 20vw;
+  height: 65vh;
+  top: 150%;
+  left: 50%;
+  margin-left: -10vw; //편법으로 수평중앙정렬 맞추기 width 20vw의 반
+  margin-top: -32.5vh; //transltate 안쓰려고 
+
+  article {
+    position: absolute;  //이래야 다 겹치게끔
+    width: 100%;
+    height: 100%;
+    left: 0; //with top 0 means, 부모랑 아예 딱 붙게
+    top: 0;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    opacity: 0.6;
+  
+    .inner {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      padding: 5vh 2.5vw 8vh;
+      border-radius: 10px;
+      box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+      // opacity: 0.6;  //주변을 흐리게하고 중앙을 강조
+    }
+  }
+}
