@@ -5,18 +5,26 @@ section {
   top: 150%;
   left: 50%;
   margin-left: -10vw; //편법으로 수평중앙정렬 맞추기 width 20vw의 반
-  margin-top: -32.5vh; //transltate 안쓰려고 
+  margin-top: -32.5vh; //transltate 안쓰려고
+  transition: 1s;
+  // background-color: orange;
 
   article {
-    position: absolute;  //이래야 다 겹치게끔
+    position: absolute; //이래야 다 겹치게끔
     width: 100%;
     height: 100%;
     left: 0; //with top 0 means, 부모랑 아예 딱 붙게
     top: 0;
     border-radius: 10px;
-    background-color: antiquewhite;
-    opacity: 0.6;
-  
+
+    &.on {
+      .inner {
+        //실제 디자인은 여기로 들어가니깐
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     .inner {
       width: 100%;
       height: 100%;
@@ -24,7 +32,122 @@ section {
       padding: 5vh 2.5vw 8vh;
       border-radius: 10px;
       box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
-      // opacity: 0.6;  //주변을 흐리게하고 중앙을 강조
+      opacity: 0.6; //주변을 흐리게하고 중앙을 강조
+      transform: scale(0.8);
+      transition: 1s; //돌아가는게 1초니깐 변하는것도 1초
+
+      .pic {
+        width: 15vw;
+        height: 15vw;
+        position: relative;
+        background-size: 0; //main.js 를 image 에 inherit 후 전부 사각형으로 바뀐걸 커버를 없애면 다시 원으로 돌아옴
+
+        &::before,
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          border-radius: 50%;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          background-image: inherit; //main.js 에서 받아올것
+        }
+        //SHADOW
+        &::before {
+          transform: translateY(10%);
+          filter: blur(20px) brightness(130%);
+        }
+
+        // 재생일때 이미지 돌리기
+        &.on {
+          &::before {
+            animation: rotation2 4s linear infinite;
+          }
+
+          &::after {
+            animation: rotation 4s linear infinite;
+          }
+        }
+
+        .dot {
+          position: absolute;
+          width: 2.5vw;
+          height: 2.5vw;
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: white;
+          box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.5);
+          z-index: 3;
+        }
+      }
+
+      .text {
+        position: absolute;
+        width: 15vw; //패널이 20, 그안에 양쪽으로 2.5씩 줬으니깐 15가 남음
+        text-align: center;
+        margin-top: 60px;
+        letter-spacing: 1px; //자간 띄우기
+
+        h2 {
+          margin-bottom: 20px;
+        }
+
+        p {
+          color: #777;
+        }
+
+        .control {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 40px;
+
+          li {
+            cursor: pointer;
+            opacity: 0.6;
+            transition: 0.5s;
+
+            &.play {
+              transform: scale(1.5);
+              opacity: 0.8;
+            }
+
+            &:hover {
+              transform: scale(1.5);
+              opacity: 1;
+
+              &.play {
+                transform: scale(2);
+              }
+            }
+          }
+        }
+      }
     }
+  }
+}
+
+//키프레임 정의 (재생일때 이미지 돌리기 ) .pic 이랑 같이 움직임
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotation2 {
+  0% {
+    transform: translateY(10%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(10%) rotate(360deg);
   }
 }
